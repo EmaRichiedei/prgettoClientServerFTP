@@ -68,7 +68,7 @@ public class LeggiDatiServer {
      * @return
      */
     public boolean infoNonPresente(String nomeFile){
-         boolean presenti = true;
+         boolean nonPresenti = true;
          File file = new File(nomeFile);
 
          if(file.exists()) {       // per prima cosa controllo se il file esiste
@@ -77,17 +77,17 @@ public class LeggiDatiServer {
              if (file.length() == 0) {
                  //il file è vuoto
                  // quindi NON sono presenti informazioni
-                 presenti = true;
+                 nonPresenti = true;
              } else {
                  // il file non è vuoto e sono presenti informazioni
-                 presenti = false;
+                 nonPresenti = false;
              }
          }else{
              //file non esiste, quindi le informazioni non sono presenti
-             presenti=true;
+             nonPresenti=true;
          }
 
-         return  presenti;
+         return  nonPresenti;
     }
 
 }

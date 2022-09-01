@@ -8,13 +8,20 @@ public class AutenticazioneFinestra {
 
     private Autenticazione autent;
     private ElencoFile elencoFile;
-    public AutenticazioneFinestra(){}
+    public AutenticazioneFinestra(){
+        creaFinestra();
+
+    }
     public AutenticazioneFinestra(ElencoFile _elencoFile){
+        creaFinestra();
+        elencoFile=_elencoFile;
 
+    }
 
+    public void creaFinestra(){
         JFrame frame = new JFrame("FTPSender - Autenticazione");
         autent = new Autenticazione(frame);
-        elencoFile=_elencoFile;
+        //elencoFile=_elencoFile;
         autent.setElencoFile(elencoFile);
 
         frame.setContentPane(autent.getAuteticazionePanel());

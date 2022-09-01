@@ -1,5 +1,6 @@
 package interfacciaGrafica;
 
+import core.SceltaFileSingleton;
 import impostazioni.CambioServer;
 import impostazioni.CambioSicurezza;
 import impostazioni.LeggiDatiServer;
@@ -27,10 +28,11 @@ public class Impostazioni {
     private String porta;
     private String server;
     private boolean sicuro;
-
+    private boolean infoAggiornate=false;
     LeggiDatiServer caricaDati= new LeggiDatiServer();
     CambioSicurezza aggiorna = new CambioSicurezza();
     private JFrame frame;
+
 
     public Impostazioni(JFrame frame)  throws  IOException {
         this.frame = frame;
@@ -58,7 +60,6 @@ public class Impostazioni {
     }
 
     }
-
 
     private class SalvaDati implements ActionListener {
 
@@ -88,6 +89,7 @@ public class Impostazioni {
 
             porta=portaInserita;
             server=serverInserito;
+            infoAggiornate =true;
             try {
                 cambio.cambio();
             } catch (IOException ex) {
@@ -95,6 +97,16 @@ public class Impostazioni {
             }
 
             frame.setVisible(false);
+
+            if(infoAggiornate){
+                try {
+                    //FinestraSceltaFile sceltaFile = new FinestraSceltaFile(sicuro);
+                    SceltaFileSingleton.getFinestraFile(sicuro);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
 
 
         }
@@ -107,6 +119,9 @@ public class Impostazioni {
         sicuro= caricaDati.getProtocolloSicuro();
     }
 
+    public boolean isInfoAggiornate() {
+        return infoAggiornate;
+    }
 
     public JPanel getImpostazioniPanel (){
         return impostazioniView;
