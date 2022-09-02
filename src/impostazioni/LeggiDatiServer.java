@@ -24,11 +24,12 @@ public class LeggiDatiServer {
 
     public LeggiDatiServer() {}
 
-    public void  caricaDati() throws IOException{
+    public void  caricaDati() throws IOException{  //TODO inserire controllo su esistenza dei File
 
         // leggo il file e importo i valori
         String socket =leggi(Configurazione.FILE_CONFIGURAZIONE_SERVER);
         String sicuroStr=leggi(Configurazione.FILE_CONFIGURAZIONE_SICUREZZA);
+
 
         int indice =-1;
         indice = socket.indexOf("|");
@@ -90,4 +91,20 @@ public class LeggiDatiServer {
          return  nonPresenti;
     }
 
+    /***
+     * controlla se i file di configrazione del sistema sono presenti
+     */
+    public boolean  fileConfigurazionepresenti(){
+        boolean presenti=false;
+
+        File fileServer = new File(Configurazione.FILE_CONFIGURAZIONE_SERVER);
+        File fileProtocollo = new File(Configurazione.FILE_CONFIGURAZIONE_SICUREZZA);
+
+        if(fileServer.exists()){
+            if(fileProtocollo.exists()){
+                presenti=true;
+            }
+        }
+        return presenti;
+    }
 }

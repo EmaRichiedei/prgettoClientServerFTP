@@ -1,8 +1,7 @@
 package impostazioni;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import core.Configurazione;
+
 import java.io.IOException;
 
 
@@ -20,7 +19,7 @@ public class CambioServer{
       * confermo la scelta
 
     */
-    final static String NOMEFILE = "server.txt";
+    final static String NOMEFILE = Configurazione.FILE_CONFIGURAZIONE_SERVER;
     private String indServer = null;
     private String porta = null;
     private String nuovoIndServer = null ;

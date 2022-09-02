@@ -38,6 +38,7 @@ public class Impostazioni {
         this.frame = frame;
 
         configurazioneIniziale();  // carico le configurazioni iniziali
+
         salvaBtn.addActionListener(new SalvaDati());
 
         sceltaSicurezza.add(sftpRbtn);
@@ -113,10 +114,15 @@ public class Impostazioni {
     }
 
 
-    private void configurazioneIniziale (){
-        porta = caricaDati.getPorta();
-        server = caricaDati.getIndirizzoServer();
-        sicuro= caricaDati.getProtocolloSicuro();
+    private void configurazioneIniziale () throws IOException {
+
+          //TODO inserire conttrollo esistenza dei file
+        if(caricaDati.fileConfigurazionepresenti()) {
+            caricaDati.caricaDati();
+            porta = caricaDati.getPorta();
+            server = caricaDati.getIndirizzoServer();
+            sicuro = caricaDati.getProtocolloSicuro();
+        }
     }
 
     public boolean isInfoAggiornate() {
