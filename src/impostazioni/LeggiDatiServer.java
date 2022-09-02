@@ -32,14 +32,14 @@ public class LeggiDatiServer {
 
 
         int indice =-1;
-        indice = socket.indexOf("|");
-        indirizzoServer = socket.substring(0,indice);
-        porta=socket.substring(indice+1);
+        if(!isVuoto(Configurazione.FILE_CONFIGURAZIONE_SERVER)) {
+            indice = socket.indexOf("|");
+
+            indirizzoServer = socket.substring(0, indice);
+            porta = socket.substring(indice + 1);
+        }
 
         sicuro=Boolean.valueOf(sicuroStr);
-
-
-
     }
 
     public String getIndirizzoServer(){
@@ -97,14 +97,25 @@ public class LeggiDatiServer {
     public boolean  fileConfigurazionepresenti(){
         boolean presenti=false;
 
-        File fileServer = new File(Configurazione.FILE_CONFIGURAZIONE_SERVER);
-        File fileProtocollo = new File(Configurazione.FILE_CONFIGURAZIONE_SICUREZZA);
-
-        if(fileServer.exists()){
-            if(fileProtocollo.exists()){
+        if(isPresente(Configurazione.FILE_CONFIGURAZIONE_SERVER)){
+            if(isPresente(Configurazione.FILE_CONFIGURAZIONE_SICUREZZA)){
                 presenti=true;
             }
         }
         return presenti;
     }
+
+    public boolean isPresente(String nomeFile){
+        File file = new File(nomeFile);
+        return file.exists();
+    }
+    public boolean isVuoto(String nomeFile){
+        boolean isVuoto = false;
+        File file = new File(nomeFile);
+        if (file.length()==0){
+            isVuoto=true;
+        }
+        return isVuoto;
+    }
+
 }

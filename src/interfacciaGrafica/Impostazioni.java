@@ -116,12 +116,18 @@ public class Impostazioni {
 
     private void configurazioneIniziale () throws IOException {
 
-          //TODO inserire conttrollo esistenza dei file
+
         if(caricaDati.fileConfigurazionepresenti()) {
             caricaDati.caricaDati();
-            porta = caricaDati.getPorta();
-            server = caricaDati.getIndirizzoServer();
-            sicuro = caricaDati.getProtocolloSicuro();
+            //if(!caricaDati.isVuoto(Configurazione.FILE_CONFIGURAZIONE_SERVER)){
+                porta = caricaDati.getPorta();
+                server = caricaDati.getIndirizzoServer();
+
+            //}
+            //if(!caricaDati.isVuoto(Configurazione.FILE_CONFIGURAZIONE_SICUREZZA)){
+                sicuro = caricaDati.getProtocolloSicuro();
+            //}
+
         }
     }
 

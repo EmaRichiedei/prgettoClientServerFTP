@@ -40,10 +40,7 @@ public class Main{
 
         if(infoConnessioneNonPresenti==false) {
             caricaDati.caricaDati();
-        }else{
-
         }
-
         connessioneSicura = caricaDati.getProtocolloSicuro();
 
 
