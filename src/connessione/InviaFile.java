@@ -43,6 +43,8 @@ public class InviaFile {
         }else{
             //utilizzo protocollo SFTP
             inoltro= new FTPSicura();
+            inoltro.autenticati(server,porta,nomeUtente,password);
+            inoltro.inviaFile(elencoFile);
         }
     }
     public void setServer(String _server){
