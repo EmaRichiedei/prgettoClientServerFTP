@@ -27,7 +27,7 @@ public class AutenticazioneFinestra {
         frame.setContentPane(autent.getAuteticazionePanel());
         frame.setLocation(750,450);
         frame.setSize(600,500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
