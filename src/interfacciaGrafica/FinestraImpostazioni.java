@@ -11,7 +11,7 @@ public class FinestraImpostazioni  {
         impo =new Impostazioni(frame);
         frame.setContentPane(impo.getImpostazioniPanel());
         frame.setLocation(750,450);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
 
