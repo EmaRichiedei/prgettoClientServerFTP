@@ -1,6 +1,7 @@
 package impostazioni;
 
 import core.Configurazione;
+import impostazioni.aggiorna_dati.CambioUtente;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,15 +21,20 @@ public class LeggiDatiServer {
 
     private String indirizzoServer = null;
     private String porta = null;
+    private String nomeUtente=null;
+    private String password=null;
     private boolean sicuro;
 
-    public LeggiDatiServer() {}
+    public LeggiDatiServer() {
+
+    }
 
     public void  caricaDati() throws IOException{  //TODO inserire controllo su esistenza dei File
 
         // leggo il file e importo i valori
         String socket =leggi(Configurazione.FILE_CONFIGURAZIONE_SERVER);
         String sicuroStr=leggi(Configurazione.FILE_CONFIGURAZIONE_SICUREZZA);
+        CambioUtente cambioUtente = new CambioUtente();
 
 
         int indice =-1;
@@ -40,6 +46,9 @@ public class LeggiDatiServer {
         }
 
         sicuro=Boolean.valueOf(sicuroStr);
+
+        this.password=cambioUtente.getPassword();
+        this.nomeUtente=cambioUtente.getNomeUtente();
     }
 
     public String getIndirizzoServer(){
@@ -55,7 +64,6 @@ public class LeggiDatiServer {
     public String  leggi(String nomeFile) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(nomeFile));
         String line ;
-
         line = reader.readLine();
         reader.close();
 
@@ -117,5 +125,11 @@ public class LeggiDatiServer {
         }
         return isVuoto;
     }
+    public String getNomeUtente(){
+        return nomeUtente;
 
+    }
+    public String getPassword() {
+        return password;
+    }
 }
