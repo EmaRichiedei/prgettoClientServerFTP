@@ -1,8 +1,8 @@
 package interfacciaGrafica;
 
 import core.SceltaFileSingleton;
-import impostazioni.CambioServer;
-import impostazioni.CambioSicurezza;
+import impostazioni.aggiorna_dati.CambioServer;
+import impostazioni.aggiorna_dati.CambioSicurezza;
 import impostazioni.LeggiDatiServer;
 
 import javax.swing.*;
@@ -86,7 +86,6 @@ public class Impostazioni {
 
             cambio.setNuovaPorta(portaInserita);
             cambio.setNuovoIndServer(serverInserito);
-
 
             porta=portaInserita;
             server=serverInserito;
