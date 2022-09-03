@@ -1,6 +1,7 @@
-package impostazioni;
+package impostazioni.aggiorna_dati;
 
 import core.Configurazione;
+import salvadati.ScriviFile;
 
 import java.io.IOException;
 
@@ -27,12 +28,8 @@ public class CambioServer{
 
     public void cambio() throws IOException {
 
-        //LeggiDatiServer leggiDatiServer = new LeggiDatiServer();
         ScriviFile scriviFile = new ScriviFile ();
         String nuovoSocket = null;
-
-        //indServer = leggiDatiServer.getIndirizzoServer();
-       // porta= leggiDatiServer.getPorta();
 
         nuovoSocket=nuovoIndServer+"|"+nuovaPorta ;
 
