@@ -3,6 +3,7 @@ package interfacciaGrafica;
 import connessione.InviaFile;
 import core.ElencoFile;
 import impostazioni.LeggiDatiServer;
+import impostazioni.aggiorna_dati.CambioUtente;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,7 @@ public class Autenticazione {
     private JTextField usernameTxtFild;
     private JButton autemticaBtn;
     private JPanel autenticazionePanel;
+    private JCheckBox salvaCredenziali;
 
     private String utente;
     private String password;
@@ -26,15 +28,20 @@ public class Autenticazione {
     InviaFile invia ;
     private JFrame frame;
 
-    public Autenticazione(JFrame frame) {
+    public Autenticazione(JFrame frame) throws IOException {
         this.frame = frame;
+
+        leggiDatiServer.caricaDati();
+
+        String a=leggiDatiServer.getNomeUtente();
+
+        usernameTxtFild.setText(a);
+        inserimentoPw.setText(leggiDatiServer.getPassword());
         //ElencoFile _elencoFile
         invia= new InviaFile(sicuro,elencoFile);
 
         invia.setServer(leggiDatiServer.getIndirizzoServer());
         invia.setPorta (leggiDatiServer.getPorta());
-
-
 
         autemticaBtn.addActionListener(new ActionListener() {
             /**
@@ -44,9 +51,18 @@ public class Autenticazione {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                  utente=usernameTxtFild.getText();
+                  password =inserimentoPw.getText();
 
-                invia.setNomeUtente(usernameTxtFild.getText());
-                invia.setPassword(inserimentoPw.getText());
+                  invia.setNomeUtente(utente);
+                  invia.setPassword(password);
+
+                if(salvaCredenziali.isSelected()){
+                    //salva credenziali Utente
+                    CambioUtente cambioUtente = new CambioUtente();
+                    cambioUtente.scriviDatiUtente(utente,password);
+
+                }
 
                 try {
 
@@ -55,6 +71,7 @@ public class Autenticazione {
                     ex.printStackTrace();
                 }
                 frame.setVisible(false);
+
             }
         });
     }
