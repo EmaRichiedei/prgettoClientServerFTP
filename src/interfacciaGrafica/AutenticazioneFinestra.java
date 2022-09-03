@@ -3,22 +3,20 @@ package interfacciaGrafica;
 import core.ElencoFile;
 
 import javax.swing.*;
+import java.io.IOException;
 
 public class AutenticazioneFinestra {
 
     private Autenticazione autent;
     private ElencoFile elencoFile;
-    public AutenticazioneFinestra(){
-        creaFinestra();
 
-    }
-    public AutenticazioneFinestra(ElencoFile _elencoFile){
+    public AutenticazioneFinestra(ElencoFile _elencoFile)throws  IOException{
         creaFinestra();
         elencoFile=_elencoFile;
 
     }
 
-    public void creaFinestra(){
+    public void creaFinestra() throws IOException {
         JFrame frame = new JFrame("FTPSender - Autenticazione");
         autent = new Autenticazione(frame);
         //elencoFile=_elencoFile;
