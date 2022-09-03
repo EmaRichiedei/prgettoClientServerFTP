@@ -21,12 +21,17 @@ public class AcquisisciCredenziali implements  ActionListener{
     }
 
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent e)  {
             /*permette l'invio dei dati
              * acquisico le credenziali dell'utente
              * invio i file mediante il protocollo scelto
              */
-            AutenticazioneFinestra autenticazioneFinestra = new AutenticazioneFinestra(elencoFile);
+            try {
+                AutenticazioneFinestra autenticazioneFinestra = new AutenticazioneFinestra(elencoFile);
+            }catch (IOException ef){
+
+            }
+
 
 
 
