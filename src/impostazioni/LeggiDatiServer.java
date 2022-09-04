@@ -46,7 +46,7 @@ public class LeggiDatiServer {
     }
 
     /***
-     *   divide il socket ip|porta nelle due informazioni differenti
+     *   divide il socket nomeUtente|password nelle due informazioni differenti
      */
 
     private void splitUtente(String datiUtenti) {
