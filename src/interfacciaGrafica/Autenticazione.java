@@ -4,6 +4,7 @@ import connessione.InviaFile;
 import core.ElencoFile;
 import impostazioni.LeggiDatiServer;
 import impostazioni.aggiorna_dati.CambioUtente;
+import impostazioni.aggiorna_dati.CaricaServerSingleton;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -23,7 +24,7 @@ public class Autenticazione {
     private String password;
     private boolean sicuro;
     private ElencoFile elencoFile;
-    private LeggiDatiServer leggiDatiServer= new LeggiDatiServer() ;
+    private LeggiDatiServer leggiDatiServer= CaricaServerSingleton.getInstance();
 
     InviaFile invia ;
     private JFrame frame;
@@ -59,6 +60,7 @@ public class Autenticazione {
 
                 if(salvaCredenziali.isSelected()){
                     //salva credenziali Utente
+
                     CambioUtente cambioUtente = new CambioUtente();
                     cambioUtente.scriviDatiUtente(utente,password);
 

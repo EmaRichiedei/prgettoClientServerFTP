@@ -4,6 +4,7 @@ import core.SceltaFileSingleton;
 import impostazioni.aggiorna_dati.CambioServer;
 import impostazioni.aggiorna_dati.CambioSicurezza;
 import impostazioni.LeggiDatiServer;
+import impostazioni.aggiorna_dati.CaricaServerSingleton;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -29,7 +30,7 @@ public class Impostazioni {
     private String server;
     private boolean sicuro;
     private boolean infoAggiornate=false;
-    LeggiDatiServer caricaDati= new LeggiDatiServer();
+    LeggiDatiServer caricaDati= CaricaServerSingleton.getInstance();
     CambioSicurezza aggiorna = new CambioSicurezza();
     private JFrame frame;
 

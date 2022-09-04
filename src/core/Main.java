@@ -1,6 +1,7 @@
 package core;
 
 import impostazioni.LeggiDatiServer;
+import impostazioni.aggiorna_dati.CaricaServerSingleton;
 import interfacciaGrafica.FinestraImpostazioni;
 import interfacciaGrafica.FinestraSceltaFile;
 
@@ -18,7 +19,8 @@ public class Main{
         //FinestraSceltaFile finestraSceltaFile =null;
         FinestraImpostazioni finImpo = null;
 
-        LeggiDatiServer caricaDati= new LeggiDatiServer();
+        //LeggiDatiServer caricaDati= new LeggiDatiServer();
+         LeggiDatiServer caricaDati =CaricaServerSingleton.getInstance();
 
         infoServerNonPresenti = caricaDati.infoNonPresente(Configurazione.FILE_CONFIGURAZIONE_SERVER);
         // carico le informazioni relative al protocolloda utilizzare
