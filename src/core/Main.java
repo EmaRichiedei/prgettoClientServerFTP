@@ -11,14 +11,12 @@ public class Main{
 
     public static void main(String[] args) throws IOException {
 
-        boolean infoAggiornate=false;
         boolean connessioneSicura=false;
         boolean infoServerNonPresenti=true;
         boolean infoConnessioneNonPresenti=true;
+
         //FinestraSceltaFile finestraSceltaFile =null;
         FinestraImpostazioni finImpo = null;
-
-
 
         LeggiDatiServer caricaDati= new LeggiDatiServer();
 
@@ -34,7 +32,7 @@ public class Main{
             finImpo= new FinestraImpostazioni();
 
         }else{
-            // finestraSceltaFile = new FinestraSceltaFile(connessioneSicura);
+
             FinestraSceltaFile fi = SceltaFileSingleton.getFinestraFile(connessioneSicura);
         }
 
