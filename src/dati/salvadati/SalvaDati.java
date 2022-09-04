@@ -1,4 +1,4 @@
-package salvadati;
+package dati.salvadati;
 
 public interface SalvaDati {
 
