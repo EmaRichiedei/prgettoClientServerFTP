@@ -1,7 +1,7 @@
 package impostazioni.aggiorna_dati;
 
 import core.Configurazione;
-import salvadati.ScriviFile;
+import dati.salvadati.ScriviFile;
 
 import java.io.IOException;
 
