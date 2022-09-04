@@ -1,11 +1,8 @@
 package impostazioni;
 
 import core.Configurazione;
-import impostazioni.aggiorna_dati.CambioUtente;
+import dati.caricadati.LeggiFile;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 
 public class LeggiDatiServer {
@@ -25,49 +22,37 @@ public class LeggiDatiServer {
     private String password=null;
     private boolean sicuro;
 
-    public LeggiDatiServer() {
+    LeggiFile leggi= new LeggiFile();
 
+    public LeggiDatiServer() {
     }
 
-    public void  caricaDati() throws IOException{  //TODO inserire controllo su esistenza dei File
+    public void  caricaDati() throws IOException{
 
         // leggo il file e importo i valori
-        String socket =leggi(Configurazione.FILE_CONFIGURAZIONE_SERVER);
-        String sicuroStr=leggi(Configurazione.FILE_CONFIGURAZIONE_SICUREZZA);
-        CambioUtente cambioUtente = new CambioUtente();
+        String socket=null;
+        String sicuroStr = null;
+        String datiUtenti=null;
 
+        socket = leggi.leggi(Configurazione.FILE_CONFIGURAZIONE_SERVER);
+        sicuroStr= leggi.leggi(Configurazione.FILE_CONFIGURAZIONE_SICUREZZA);
+        datiUtenti=leggi.leggi(Configurazione.FILE_CONFIGURAZIONE_UTENTE);
 
-        int indice =-1;
-        if(!isVuoto(Configurazione.FILE_CONFIGURAZIONE_SERVER)) {
-            indice = socket.indexOf("|");
-
-            indirizzoServer = socket.substring(0, indice);
-            porta = socket.substring(indice + 1);
-        }
+        splitSocket(socket);
+        splitUtente(datiUtenti);
 
         sicuro=Boolean.valueOf(sicuroStr);
 
-        this.password=cambioUtente.getPassword();
-        this.nomeUtente=cambioUtente.getNomeUtente();
     }
 
-    public String getIndirizzoServer(){
-        return indirizzoServer;
-    }
+    private void splitUtente(String datiUtenti) {
+        int indice =-1;
+        if(!leggi.isSorgenteVuota(Configurazione.FILE_CONFIGURAZIONE_SERVER)) {
+            indice = datiUtenti.indexOf("|");
 
-    public   String getPorta(){
-        return porta;
-    }
-
-    public boolean getProtocolloSicuro(){return  sicuro;}
-
-    public String  leggi(String nomeFile) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(nomeFile));
-        String line ;
-        line = reader.readLine();
-        reader.close();
-
-        return line;
+            nomeUtente = datiUtenti.substring(0, indice);
+            password = datiUtenti.substring(indice + 1);
+        }
     }
 
     /***
@@ -77,26 +62,7 @@ public class LeggiDatiServer {
      * @return
      */
     public boolean infoNonPresente(String nomeFile){
-         boolean nonPresenti = true;
-         File file = new File(nomeFile);
-
-         if(file.exists()) {       // per prima cosa controllo se il file esiste
-             // file esiste
-
-             if (file.length() == 0) {
-                 //il file è vuoto
-                 // quindi NON sono presenti informazioni
-                 nonPresenti = true;
-             } else {
-                 // il file non è vuoto e sono presenti informazioni
-                 nonPresenti = false;
-             }
-         }else{
-             //file non esiste, quindi le informazioni non sono presenti
-             nonPresenti=true;
-         }
-
-         return  nonPresenti;
+         return leggi.infoNonPresente(nomeFile);
     }
 
     /***
@@ -105,30 +71,43 @@ public class LeggiDatiServer {
     public boolean  fileConfigurazionepresenti(){
         boolean presenti=false;
 
-        if(isPresente(Configurazione.FILE_CONFIGURAZIONE_SERVER)){
-            if(isPresente(Configurazione.FILE_CONFIGURAZIONE_SICUREZZA)){
+        if(leggi.isSorgenteEsistente(Configurazione.FILE_CONFIGURAZIONE_SERVER)){
+            if(leggi.isSorgenteEsistente(Configurazione.FILE_CONFIGURAZIONE_SICUREZZA)){
                 presenti=true;
             }
         }
         return presenti;
     }
 
-    public boolean isPresente(String nomeFile){
-        File file = new File(nomeFile);
-        return file.exists();
-    }
-    public boolean isVuoto(String nomeFile){
-        boolean isVuoto = false;
-        File file = new File(nomeFile);
-        if (file.length()==0){
-            isVuoto=true;
+    /***
+     * divide il socket ip|porta nelle due informazioni differenti
+     * @param socket
+     */
+
+    public void splitSocket(String socket){
+        int indice =-1;
+        if(!leggi.isSorgenteVuota(Configurazione.FILE_CONFIGURAZIONE_SERVER)) {
+            indice = socket.indexOf("|");
+
+            indirizzoServer = socket.substring(0, indice);
+            porta = socket.substring(indice + 1);
         }
-        return isVuoto;
-    }
+}
+
     public String getNomeUtente(){
         return nomeUtente;
-
     }
+
+    public String getIndirizzoServer(){
+        return indirizzoServer;
+    }
+
+    public String getPorta(){
+        return porta;
+    }
+
+    public boolean getProtocolloSicuro(){return  sicuro;}
+
     public String getPassword() {
         return password;
     }
