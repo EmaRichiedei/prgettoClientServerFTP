@@ -45,6 +45,10 @@ public class LeggiDatiServer {
 
     }
 
+    /***
+     *   divide il socket ip|porta nelle due informazioni differenti
+     */
+
     private void splitUtente(String datiUtenti) {
         int indice =-1;
         if(!leggi.isSorgenteVuota(Configurazione.FILE_CONFIGURAZIONE_SERVER)) {
