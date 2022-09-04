@@ -1,3 +1,5 @@
+package core;
+
 public class DatiUtente {
     private String nomeUtente=null;
     private String password=null;
